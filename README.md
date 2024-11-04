@@ -19,11 +19,21 @@ Ensure the following are installed on your machine:
     ```
     cd smessenger
     ```
-3. Start the Docker containers:
+3. Copy ejabberd configuration file:
+    ```
+    cp ejabberd.yml.example ejabberd.yml
+    ```
+4. Start the Docker containers:
     ```
     docker compose up
     ```
-This command will set up and start both the ejabberd and PostgreSQL services as defined in the docker-compose.yml file.
+    This command will set up and start both the ejabberd and PostgreSQL services as defined in the docker-compose.yml file.
+
+5. Register admin user:
+    ```
+    docker exec -it ejabberd ejabberdctl register admin localhost passw0rd
+    ```
+    Replace `passw0rd` with your desired password.
 ## Usage
 After running docker compose up, the following URLs and ports are available:
 
