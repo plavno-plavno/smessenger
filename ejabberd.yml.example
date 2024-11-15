@@ -195,6 +195,7 @@ modules:
   mod_mqtt: {}
   mod_muc:
     host: "conference.localhost"
+    db_type: sql
     access:
       - allow
     access_admin:
@@ -202,10 +203,21 @@ modules:
     access_create: muc_create
     access_persistent: muc_create
     access_register: register
-    access_mam:
-      - allow
+    max_users: 1000
+    max_user_conferences: 1000
+    history_size: 0
     default_room_options:
-      mam: true
+      allow_change_subj: true
+      allow_query_users: true
+      # allow_private_messages: false
+      allow_user_invites: true
+      logging: true
+      members_by_default: false
+      members_only: true
+      anonymous: false
+      public: false
+      persistent: true
+      public_list: false
   mod_muc_admin: {}
   mod_offline:
     db_type: sql

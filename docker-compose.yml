@@ -23,10 +23,13 @@ services:
       - ./ejabberd.yml:/home/ejabberd/conf/ejabberd.yml:ro
       - ./conf/certs:/home/ejabberd/conf/certs/:ro
       - ejabbered_db:/home/ejabberd/database
+      - ./setup-ejabberd.sh:/opt/setup-ejabberd.sh
     networks:
       - ejabberd-network
     depends_on:
       - postgres
+    entrypoint: ["/bin/sh", "-c", "/opt/setup-ejabberd.sh && ejabberdctl foreground"]
+    user: root
 volumes:
   ejabbered_db:
   postgres_data:
