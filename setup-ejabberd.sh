@@ -1,6 +1,6 @@
-# Check if the initialization has been done
 chmod -R 777 /opt
 
+# Check if the initialization has been done
 if [ ! -f /opt/initialized ]; then
   echo "Initializing ejabberd..."
 
@@ -20,7 +20,7 @@ if [ ! -f /opt/initialized ]; then
   if ! ejabberdctl registered_users | grep -q "admin@localhost"; then
     ejabberdctl register admin localhost adminpassword
   fi
-  
+
   # Add users (if they don't already exist)
   if ! ejabberdctl registered_users | grep -q "user1@localhost"; then
     ejabberdctl register user1 localhost user1password
