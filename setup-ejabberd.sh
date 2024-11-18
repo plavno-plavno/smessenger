@@ -42,17 +42,19 @@ if [ ! -f /opt/initialized ]; then
     ejabberdctl register user5 localhost user5password
   fi
 
-  users="user1 user2 user3 user4 user5"
+  users="user1 user2 user3 user4"
 
-  # Loop through each user
-  for user1 in $users; do
-    for user2 in $users; do
-      # Avoid adding a user to their own roster
-      if [ "$user1" != "$user2" ]; then
-        # Add user2 to user1's roster
-        echo "Add $user1 and $user2 to each other roaster"
-        ejabberdctl add_rosteritem "$user1" localhost "$user2" localhost "$user2" friends,colleagues both
-      fi
+  # Convert the string into an array-like list
+  set -- $users
+
+  # Outer loop: Iterate over each user
+  for user1; do
+    shift # Remove the current user1 from the list
+    # Inner loop: Iterate over remaining users
+    for user2; do
+      echo "Add $user1 and $user2 to each other roaster"
+      # Add user2 to user1's roster
+      ejabberdctl add_rosteritem "$user1" localhost "$user2" localhost "$user2" friends,colleagues both
     done
   done
 

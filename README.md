@@ -53,7 +53,7 @@ with next affilations:
 - `user4@localhost` affilation `owner`
 - `user5@localhost` affilation `outcast` (=banned)
 
-Also `user1` and `user2` by default added to each other __roasters__
+All users by default added to each other __roasters__(contacts)
 ### Global admin
 `admin@localhost` password `adminpassword`
 #### Note
