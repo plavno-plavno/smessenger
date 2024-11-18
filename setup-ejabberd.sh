@@ -50,6 +50,7 @@ if [ ! -f /opt/initialized ]; then
       # Avoid adding a user to their own roster
       if [ "$user1" != "$user2" ]; then
         # Add user2 to user1's roster
+        echo "Add $user1 and $user2 to each other roaster"
         ejabberdctl add_rosteritem "$user1" localhost "$user2" localhost "$user2" friends,colleagues both
       fi
     done
