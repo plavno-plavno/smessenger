@@ -42,8 +42,20 @@ if [ ! -f /opt/initialized ]; then
     ejabberdctl register user5 localhost user5password
   fi
 
-  echo "Add user1,user2 to each other rosters"
-  ejabberdctl add_rosteritem user1 localhost user2 localhost User2 friends,colleagues both
+  users="user1 user2 user3 user4 user5"
+
+  # Loop through each user
+  for user1 in $users; do
+    for user2 in $users; do
+      # Avoid adding a user to their own roster
+      if [ "$user1" != "$user2" ]; then
+        # Add user2 to user1's roster
+        ejabberdctl add_rosteritem "$user1" localhost "$user2" localhost "$user2" friends,colleagues both
+      fi
+    done
+  done
+
+  echo "All users have been added to each other's rosters."
 
   # Create a chat room (if it doesn't already exist)
   if ! ejabberdctl get_room_occupants_number chatroom1 conference.localhost > /dev/null 2>&1; then
