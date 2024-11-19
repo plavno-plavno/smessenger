@@ -12,13 +12,17 @@ services:
     networks:
       - default
   main:
+    # https://github.com/processone/docker-ejabberd/tree/master/ecs
     image: ejabberd/ecs
     container_name: ejabberd
+    # https://docs.ejabberd.im/archive/old/#acme
     ports:
       - "5222:5222"
       - "5269:5269"
       - "5280:5280"
       - "5443:5443"
+      - "443:443"
+      - "80:5280"
     volumes:
       - ./deploy.ejabberd.yml:/home/ejabberd/conf/ejabberd.yml:ro
       - ./conf/certs:/home/ejabberd/conf/certs/:ro
