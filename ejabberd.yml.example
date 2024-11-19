@@ -62,6 +62,7 @@ listen:
     module: ejabberd_http
     tls: true
     request_handlers:
+      /api: mod_http_api
       /admin: ejabberd_web_admin
       # /api: mod_http_api
       /http-bind: mod_bosh
@@ -142,6 +143,16 @@ access_rules:
     allow: loopback
 
 api_permissions:
+  "api_access_public":
+    who: all
+    what:
+      - "status"
+  "api_access":
+    who:
+      access:
+        - allow: admin
+    what:
+      - "*"
   "console commands":
     from: ejabberd_ctl
     who: all
