@@ -18,8 +18,8 @@ log_rotate_size: 10485760
 log_rotate_count: 1
 
 hosts:
-  # - "bubcon.org"
-  - jabber.dev.wispomessenger.com
+  # - "jabber.dev.wispomessenger.com"
+  - localhost
 
 loglevel: info
 
@@ -27,7 +27,7 @@ loglevel: info
 # certfiles:
 ca_file: /home/ejabberd/conf/certs/ca.pem
 certfiles:
- - /home/ejabberd/conf/certs/cert.pem
+  - /home/ejabberd/conf/certs/cert.pem
 listen:
   -
     port: 5222
@@ -62,7 +62,6 @@ listen:
     module: ejabberd_http
     tls: true
     request_handlers:
-      /api: mod_http_api
       /admin: ejabberd_web_admin
       # /api: mod_http_api
       /http-bind: mod_bosh
@@ -114,7 +113,7 @@ acl:
   loopback:
     ip:
       - 127.0.0.0/8
-      - 172.21.0.0/16 # allow access from docker network: ejabberd-network 
+      - 172.21.0.0/16 # allow access from docker network: ejabberd-network
       - ::1/128
   admin:
     user: admin1@localhost
@@ -143,16 +142,6 @@ access_rules:
     allow: loopback
 
 api_permissions:
-  "api_access_public":
-    who: all
-    what:
-      - "status"
-  "api_access":
-    who:
-      access:
-        - allow: admin
-    what:
-      - "*"
   "console commands":
     from: ejabberd_ctl
     who: all
@@ -229,7 +218,7 @@ modules:
   #     "Access-Control-Allow-Headers": "Content-Type"
   mod_last:
     db_type: sql
-  # mod_mam:
+    # mod_mam:
     ## Mnesia is limited to 2GB, better to use an SQL backend
     ## For small servers SQLite is a good fit and is very easy
     ## to configure. Uncomment this when you have SQL configured:
@@ -240,7 +229,7 @@ modules:
   mod_muc:
     host: "conference.localhost"
     db_type: sql
-    access: muc
+    access: all
     access_admin: muc_admin
     access_create: muc_create
     access_persistent: muc_create
@@ -265,14 +254,14 @@ modules:
     db_type: sql
     access_max_user_messages: max_user_offline_messages
     store_empty_body: true
-  mod_ping: 
+  mod_ping:
     send_pings: true
     ping_interval: 5
     ping_ack_timeout: 5
     timeout_action: kill
   mod_privacy:
     db_type: sql
-  mod_private: 
+  mod_private:
     db_type: sql
   mod_proxy65:
     access: local
@@ -289,10 +278,10 @@ modules:
     max_items_node: 100
     max_subscriptions_node: 255
     last_item_cache: false
-##    default_node_config:
-##      notification_type: normal
-##      notify_retract: false
-##      max_items: 0
+    ##    default_node_config:
+    ##      notification_type: normal
+    ##      notify_retract: false
+    ##      max_items: 0
     plugins:
       - "flat"
       - "hometree"
@@ -315,7 +304,7 @@ modules:
     versioning: true
     # store_current_id: true # in previous config this value is true but commented as documentation says: if you use mod_shared_roster or mod_shared_roster_ldap, you must set the value of the option to false.
   # mod_s2s_dialback: {}
-  mod_shared_roster: 
+  mod_shared_roster:
     db_type: sql
   mod_stats: {}
   mod_time: {}
@@ -324,7 +313,7 @@ modules:
     resend_on_timeout: true
     resume_timeout: 0
   mod_stun_disco: {}
-  mod_vcard: 
+  mod_vcard:
     db_type: sql
     ##changed to true
     search: true
