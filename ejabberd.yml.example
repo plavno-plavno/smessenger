@@ -32,7 +32,7 @@ listen:
   -
     port: 5222
     ip: "::"
-    starttls_required: true
+    starttls_required: false
     module: ejabberd_c2s
     protocol_options:
       - "no_sslv3"
