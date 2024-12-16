@@ -40,9 +40,15 @@ if [ ! -f /opt/initialized ]; then
 
   if ! ejabberdctl registered_users | grep -q "user5@localhost"; then
     ejabberdctl register user5 localhost user5password
+
+  if ! ejabberdctl registered_users | grep -q "user6@localhost"; then
+    ejabberdctl register user6 localhost user6password
+
+  if ! ejabberdctl registered_users | grep -q "user7@localhost"; then
+    ejabberdctl register user7 localhost user7password
   fi
 
-  users="user1 user2 user3 user4 user5"
+  users="user1 user2 user3 user4 user5 user6 user7"
 
   # Convert the string into an array-like list
   set -- $users
@@ -87,6 +93,14 @@ if [ ! -f /opt/initialized ]; then
     # Add user5 to chatroom1 as outcast
     echo "Add user5 to chatroom1 as outcast (affiliation)"
     ejabberdctl set_room_affiliation chatroom1 conference.localhost user5@localhost outcast
+
+    # Add user6 to chatroom1 as member
+    echo "Add user6 to chatroom1 as member (affiliation)"
+    ejabberdctl set_room_affiliation chatroom1 conference.localhost user6@localhost member
+
+    # Add user7 to chatroom1 as member
+    echo "Add user7 to chatroom1 as member (affiliation)"
+    ejabberdctl set_room_affiliation chatroom1 conference.localhost user7@localhost member
   fi
 
   # Mark initialization as done
