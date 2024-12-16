@@ -43,6 +43,7 @@ if [ ! -f /opt/initialized ]; then
 
   if ! ejabberdctl registered_users | grep -q "user6@localhost"; then
     ejabberdctl register user6 localhost user6password
+  fi
 
   if ! ejabberdctl registered_users | grep -q "user7@localhost"; then
     ejabberdctl register user7 localhost user7password
