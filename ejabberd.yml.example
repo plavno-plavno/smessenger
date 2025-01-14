@@ -103,6 +103,8 @@ sql_username: ejabberd
 sql_password: ejabberd
 
 auth_method: [jwt, sql]
+jwt_key: /home/ejabberd/conf/secret.jwk
+jwt_jid_field: jid
 
 disable_sasl_mechanisms: ["DIGEST-MD5", "SCRAM-SHA-1", "X-OAUTH2"]
 
