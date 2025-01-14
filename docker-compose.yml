@@ -32,7 +32,7 @@ services:
     entrypoint: ["/bin/sh", "-c", "/opt/setup-ejabberd.sh && ejabberdctl foreground"]
     user: root
 volumes:
-  ejabbered_db:
+  ejabberd_db:
   postgres_data:
 
 networks:
