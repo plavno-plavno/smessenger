@@ -32,7 +32,7 @@ listen:
   -
     port: 5222
     ip: "::"
-    starttls_required: false
+    starttls_required: true
     module: ejabberd_c2s
     protocol_options:
       - "no_sslv3"
@@ -242,7 +242,7 @@ modules:
   mod_muc:
     host: "conference.localhost"
     db_type: sql
-    access: muc
+    access: all
     access_admin: muc_admin
     access_create: muc_create
     access_persistent: muc_create
