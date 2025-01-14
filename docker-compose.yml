@@ -22,7 +22,7 @@ services:
     volumes:
       - ./ejabberd.yml:/home/ejabberd/conf/ejabberd.yml:ro
       - ./conf/certs:/home/ejabberd/conf/certs/:ro
-      - ./conf/secret.jwk:/home/ejabberd/conf/secret.jwk/:ro
+      - ./conf/secret.jwk:/home/ejabberd/conf/secret.jwk:ro
       - ejabbered_db:/home/ejabberd/database
       - ./setup-ejabberd.sh:/opt/setup-ejabberd.sh
     networks:
