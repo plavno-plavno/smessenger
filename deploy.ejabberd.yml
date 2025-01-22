@@ -29,8 +29,7 @@ ca_file: /home/ejabberd/conf/certs/ca.pem
 certfiles:
   - /home/ejabberd/conf/certs/cert.pem
 listen:
-  -
-    port: 5222
+  - port: 5222
     ip: "::"
     starttls_required: false
     module: ejabberd_c2s
@@ -41,8 +40,7 @@ listen:
     access: c2s
     zlib: true
     max_fsm_queue: 1000
-  -
-    port: 5223
+  - port: 5223
     ip: "::"
     module: ejabberd_c2s
     max_stanza_size: 65536
@@ -50,14 +48,12 @@ listen:
     access: c2s
     tls: true
     zlib: true
-  -
-    port: 5269
+  - port: 5269
     ip: "::"
     module: ejabberd_s2s_in
     max_stanza_size: 131072
     shaper: s2s_shaper
-  -
-    port: 5443
+  - port: 5443
     ip: "::"
     module: ejabberd_http
     tls: true
@@ -68,16 +64,14 @@ listen:
       # /captcha: ejabberd_captcha
       # /upload: mod_http_upload
       /websocket: ejabberd_http_ws
-  -
-    port: 5280
+  - port: 5280
     ip: "::"
     module: ejabberd_http
     request_handlers:
       /admin: ejabberd_web_admin
       /.well-known/acme-challenge: ejabberd_acme
       /websocket: ejabberd_http_ws
-  -
-    port: 3478
+  - port: 3478
     ip: "::"
     transport: udp
     module: ejabberd_stun
@@ -86,8 +80,7 @@ listen:
     # turn_ipv4_address: "203.0.113.3"
     ## The server's public IPv6 address:
     # turn_ipv6_address: "2001:db8::3"
-  -
-    port: 1883
+  - port: 1883
     ip: "::"
     module: mod_mqtt
     backlog: 1000
@@ -103,7 +96,7 @@ sql_password: ejabberd
 
 auth_method: sql
 
-disable_sasl_mechanisms: ["DIGEST-MD5", "SCRAM-SHA-1", "X-OAUTH2"]
+disable_sasl_mechanisms: [ "DIGEST-MD5", "SCRAM-SHA-1", "X-OAUTH2" ]
 
 # s2s_use_starttls: optional
 
@@ -192,20 +185,20 @@ shaper_rules:
 language: "en"
 
 modules:
-  mod_adhoc: {}
-  mod_admin_extra: {}
+  mod_adhoc: { }
+  mod_admin_extra: { }
   mod_announce:
     access: announce
     db_type: sql
   # mod_avatar: {}
-  mod_blocking: {}
-  mod_bosh: {}
+  mod_blocking: { }
+  mod_bosh: { }
   mod_caps:
     db_type: sql
-  mod_carboncopy: {}
-  mod_client_state: {}
-  mod_configure: {}
-  mod_disco: {}
+  mod_carboncopy: { }
+  mod_client_state: { }
+  mod_configure: { }
+  mod_disco: { }
   # mod_fail2ban:
   #   c2s_max_auth_failures: 10
   #   c2s_auth_ban_lifetime: 60
@@ -249,7 +242,7 @@ modules:
       public: false
       persistent: true
       public_list: false
-  mod_muc_admin: {}
+  mod_muc_admin: { }
   mod_offline:
     db_type: sql
     access_max_user_messages: max_user_offline_messages
@@ -290,8 +283,8 @@ modules:
       ## Avoid buggy clients to make their bookmarks public
       storage:bookmarks:
         access_model: whitelist
-  mod_push: {}
-  mod_push_keepalive: {}
+  mod_push: { }
+  mod_push_keepalive: { }
   # mod_register:
   #   ## Only accept registration requests from the "trusted"
   #   ## network (see access_rules section above).
@@ -306,20 +299,20 @@ modules:
   # mod_s2s_dialback: {}
   mod_shared_roster:
     db_type: sql
-  mod_stats: {}
-  mod_time: {}
+  mod_stats: { }
+  mod_time: { }
   mod_stream_mgmt:
     max_ack_queue: infinity
     resend_on_timeout: true
     resume_timeout: 0
-  mod_stun_disco: {}
+  mod_stun_disco: { }
   mod_vcard:
     db_type: sql
     ##changed to true
     search: true
   #added
-  mod_vcard_xupdate: {}
-  mod_version: {}
+  mod_vcard_xupdate: { }
+  mod_version: { }
 
   # mod_bubcon_timestamp: {}
 

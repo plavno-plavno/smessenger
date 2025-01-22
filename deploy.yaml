@@ -14,6 +14,7 @@ services:
   main:
     # https://github.com/processone/docker-ejabberd/tree/master/ecs
     image: ejabberd/ecs
+    platform: linux/amd64
     container_name: ejabberd
     # https://docs.ejabberd.im/archive/old/#acme
     ports:
@@ -32,7 +33,7 @@ services:
       - default
     depends_on:
       - postgres
-    entrypoint: ["/bin/sh", "-c", "/opt/setup-ejabberd.sh && ejabberdctl foreground"]
+    entrypoint: [ "/bin/sh", "-c", "/opt/setup-ejabberd.sh && ejabberdctl foreground" ]
     user: root
 
 volumes:
