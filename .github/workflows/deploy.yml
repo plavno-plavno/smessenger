@@ -22,8 +22,9 @@ jobs:
       - name: Shutdown previous deploy
         run: |
           cd ejabberd
-          docker compose -f deploy.yaml down
+          docker compose -f deploy.yaml down -v
       - name: Run deploy
         run: |
           cd ejabberd
+          docker system prune -a
           docker compose -f deploy.yaml up -d
