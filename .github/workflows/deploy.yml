@@ -27,4 +27,4 @@ jobs:
         run: |
           cd ejabberd
           docker system prune -a
-          docker compose -f deploy.yaml up -d | yes
+          docker compose -f deploy.yaml up -d
