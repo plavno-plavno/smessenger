@@ -27,7 +27,8 @@ services:
     volumes:
       - ./deploy.ejabberd.yml:/home/ejabberd/conf/ejabberd.yml:ro
       - ./conf/certs:/home/ejabberd/conf/certs/:ro
-      - ejabbered_db:/home/ejabberd/database
+      - ./conf/secret.jwk:/home/ejabberd/conf/secret.jwk:ro
+      - ejabberd_db:/home/ejabberd/database
       - ./setup-ejabberd.sh:/opt/setup-ejabberd.sh
     networks:
       - default
@@ -37,7 +38,7 @@ services:
     user: root
 
 volumes:
-  ejabbered_db:
+  ejabberd_db:
   postgres_data:
 
 networks:

@@ -24,18 +24,18 @@ services:
       - ./ejabberd.yml:/home/ejabberd/conf/ejabberd.yml:ro
       - ./conf/certs:/home/ejabberd/conf/certs/:ro
       - ./conf/secret.jwk:/home/ejabberd/conf/secret.jwk:ro
-      - ejabbered_db:/home/ejabberd/database
+      - ejabberd_db:/home/ejabberd/database
       - ./setup-ejabberd.sh:/opt/setup-ejabberd.sh
     networks:
       - ejabberd-network
     depends_on:
       - postgres_smessenger
-    entrypoint: ["/bin/sh", "-c", "/opt/setup-ejabberd.sh && ejabberdctl foreground"]
+    entrypoint: [ "/bin/sh", "-c", "/opt/setup-ejabberd.sh && ejabberdctl foreground" ]
     user: root
 volumes:
-  ejabbered_db:
+  ejabberd_db:
   postgres_data:
 
 networks:
   ejabberd-network:
-    driver: bridge 
+    driver: bridge
