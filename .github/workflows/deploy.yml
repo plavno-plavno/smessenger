@@ -16,10 +16,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Shutdown previous smessenger deploy
-        run: docker compose -f deploy.yaml down
+        run: docker compose down
 
       - name: Run smessenger deploy
-        run: docker compose -f deploy.yaml up -d
+        run: docker compose up -d
 
       - name: Checkout wispo_api repository
         uses: actions/checkout@v4

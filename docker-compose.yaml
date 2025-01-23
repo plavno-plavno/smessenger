@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:17
-    container_name: postgres_smessenger
+    container_name: postgres
     environment:
       - POSTGRES_USER=ejabberd
       - POSTGRES_PASSWORD=ejabberd
@@ -20,6 +20,8 @@ services:
       - "5269:5269"
       - "5280:5280"
       - "5443:5443"
+      - "443:443"
+      - "80:5280"
     volumes:
       - ./ejabberd.yml:/home/ejabberd/conf/ejabberd.yml:ro
       - ./conf/certs:/home/ejabberd/conf/certs/:ro
@@ -29,7 +31,7 @@ services:
     networks:
       - ejabberd-network
     depends_on:
-      - postgres_smessenger
+      - postgres
     entrypoint: [ "/bin/sh", "-c", "/opt/setup-ejabberd.sh && ejabberdctl foreground" ]
     user: root
 volumes:

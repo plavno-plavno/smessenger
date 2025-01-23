@@ -19,11 +19,7 @@ Ensure the following are installed on your machine:
     ```
     cd smessenger
     ```
-3. Copy ejabberd configuration file:
-    ```
-    cp ejabberd.yml.example ejabberd.yml
-    ```
-4. Start the Docker containers:
+3. Start the Docker containers:
     ```
     docker compose up
     ```
