@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Shutdown previous smessenger deploy
-        run: docker compose down
+        run: sudo docker compose down
 
       - name: Run smessenger deploy
-        run: docker compose up -d
+        run: sudo docker compose up -d
