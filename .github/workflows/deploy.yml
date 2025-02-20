@@ -20,23 +20,3 @@ jobs:
 
       - name: Run smessenger deploy
         run: docker compose up -d
-
-      - name: Checkout wispo_api repository
-        uses: actions/checkout@v4
-        with:
-          repository: plavno-plavno/wispo_api
-          token: ${{ secrets.GIT_CHECKOUT_PAT }} # `GIT_CHECKOUT_PAT` is a secret that contains your PAT
-          path: wispo_api
-
-      - name: Shutdown previous wispo_api deploy
-        run: |
-          cd wispo_api
-          docker compose down
-
-      - name: Clean docker build cache
-        run: docker system prune -af
-
-      - name: Run wispo_api deploy
-        run: |
-          cd wispo_api
-          docker compose up --build -d
