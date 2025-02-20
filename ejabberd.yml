@@ -35,7 +35,7 @@ listen:
     module: ejabberd_c2s
     protocol_options:
       - "no_sslv3"
-    max_stanza_size: 500000
+    max_stanza_size: 1000000
     shaper: c2s_shaper
     access: c2s
     zlib: true
@@ -221,6 +221,15 @@ modules:
     # assume_mam_usage: true
     # default: always
   # mod_mqtt: {}
+  mod_mam:
+    db_type: sql
+    access_preferences: all
+    default: always
+    request_activates_archiving: false
+    use_cache: true
+    user_mucsub_from_muc_archive: false
+    compress_xml: false
+    clear_archive_on_room_destroy: true
   mod_muc:
     host: "conference.localhost"
     db_type: sql
