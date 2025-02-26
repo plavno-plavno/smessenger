@@ -294,7 +294,11 @@ modules:
       ## Avoid buggy clients to make their bookmarks public
       storage:bookmarks:
         access_model: whitelist
-  mod_push: { }
+  mod_push:
+    db_type: sql
+    include_body: true
+    include_sender: true
+    notify_on: all
   mod_push_keepalive: { }
   # mod_register:
   #   ## Only accept registration requests from the "trusted"
