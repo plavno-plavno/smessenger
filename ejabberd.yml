@@ -231,26 +231,20 @@ modules:
     access_create: muc_create
     access_persistent: muc_create
     access_register: register
+    max_users: 1000
     max_user_conferences: 1000
     history_size: 0
-    max_users: 1000
     default_room_options:
       allow_change_subj: true
       allow_query_users: true
       allow_user_invites: true
-      moderated: false
-      allow_voice_requests: true
-      #allowpm: anyone
-      allow_subscription: true
-      logging: false
-      members_by_default: true
-      members_only: false
+      logging: true
+      members_by_default: false
+      members_only: true
       anonymous: false
-      public: true
+      public: false
       persistent: true
-      public_list: true
-      mam: true
-      max_users: 1000
+      public_list: false
   mod_muc_admin: { }
   mod_offline:
     db_type: sql
