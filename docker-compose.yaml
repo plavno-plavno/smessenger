@@ -7,7 +7,7 @@ services:
       - POSTGRES_PASSWORD=ejabberd
       - POSTGRES_DB=ejabberd
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
       - ./pg.sql:/docker-entrypoint-initdb.d/pg.sql
     networks:
       - ejabberd-network
