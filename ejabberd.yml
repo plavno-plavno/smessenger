@@ -238,7 +238,7 @@ modules:
       allow_change_subj: true
       allow_query_users: true
       allow_user_invites: true
-      moderated: true
+      moderated: false
       allow_voice_requests: true
       #allowpm: anyone
       allow_subscription: true
