@@ -12,7 +12,10 @@ services:
     networks:
       - ejabberd-network
   main:
-    image: ejabberd/ecs
+    #image: ejabberd/ecs
+    build:
+      dockerfile: Dockerfile
+      context: .
     platform: linux/amd64
     container_name: ejabberd
     ports:
@@ -32,7 +35,7 @@ services:
       - ejabberd-network
     depends_on:
       - postgres
-    entrypoint: [ "/bin/sh", "-c", "/opt/setup-ejabberd.sh && ejabberdctl foreground" ]
+    entrypoint: [ "/bin/sh", "-c", "/buildroot/ejabberd/_build/prod/rel/ejabberd/bin/ejabberdctl foreground" ]
     user: root
 volumes:
   ejabberd_db:
