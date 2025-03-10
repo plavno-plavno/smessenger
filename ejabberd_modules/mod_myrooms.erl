@@ -33,7 +33,7 @@
 -define(NS_MYROOMS, <<"myrooms">>).
 
 start(Host, Opts) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Host: ~p, Opts: ~p", [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Host, Opts]),
+  ?LOG_INFO("[~p:~p/~p, ~p] Host: ~p, Opts: ~p", [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Host, Opts]),
   {ok, [
     {iq_handler, ejabberd_local, ?NS_COMMANDS, process_local_iq},
     {iq_handler, ejabberd_sm, ?NS_COMMANDS, process_sm_iq},

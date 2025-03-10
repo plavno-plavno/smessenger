@@ -25,9 +25,9 @@ loglevel: info
 
 ## If you already have certificates, list them here
 # certfiles:
-ca_file: /home/ejabberd/conf/certs/ca.pem
+ca_file: /buildroot/ejabberd/_build/prod/rel/ejabberd/conf/certs/ca.pem
 certfiles:
-  - /home/ejabberd/conf/certs/cert.pem
+  - /buildroot/ejabberd/_build/prod/rel/ejabberd/conf/certs/cert.pem
 listen:
   - port: 5222
     ip: "::"
@@ -95,7 +95,7 @@ sql_username: ejabberd
 sql_password: ejabberd
 
 auth_method: [ jwt, sql ]
-jwt_key: /home/ejabberd/conf/secret.jwk
+jwt_key: /buildroot/ejabberd/_build/prod/rel/ejabberd/conf/secret.jwk
 jwt_jid_field: jid
 
 disable_sasl_mechanisms: [ "DIGEST-MD5", "SCRAM-SHA-1", "X-OAUTH2" ]
@@ -317,6 +317,8 @@ modules:
     search: true
   mod_vcard_xupdate: { }
   mod_version: { }
+  mod_myrooms: { }
+  mod_membersinfo: { }
 
   # mod_bubcon_timestamp: {}
 
