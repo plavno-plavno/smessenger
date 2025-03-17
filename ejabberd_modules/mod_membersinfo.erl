@@ -33,7 +33,7 @@
 -define(NS_MEMBERSINFO, <<"membersinfo">>).
 
 start(Host, Opts) ->
-  ?LOG_INFO("[~p:~p/~p, ~p] Host: ~p, Opts: ~p", [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Host, Opts]),
+  ?LOG_INFO("Host: ~p, Opts: ~p", [Host, Opts]),
   {ok, [
     {iq_handler, ejabberd_local, ?NS_COMMANDS, process_local_iq},
     {iq_handler, ejabberd_sm, ?NS_COMMANDS, process_sm_iq},
@@ -50,31 +50,27 @@ start(Host, Opts) ->
   ]}.
 
 stop(Host) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Host: ~p", [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Host]),
+%%  ?LOG_INFO("Host: ~p", [Host]),
   ok.
 
 reload(Host, NewOpts, OldOpts) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Host: ~p, NewOpts: ~p, OldOpts: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Host, NewOpts, OldOpts]),
+%%  ?LOG_INFO("Host: ~p, NewOpts: ~p, OldOpts: ~p", [Host, NewOpts, OldOpts]),
   ok.
 
 depends(Host, Opts) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Host: ~p, Opts: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Host, Opts]),
+%%  ?LOG_INFO("Host: ~p, Opts: ~p", [Host, Opts]),
   [{mod_adhoc, hard}].
 
 mod_options(Host) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Host: ~p", [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Host]),
+%%  ?LOG_INFO("Host: ~p", [Host]),
   [
     {hostname, none}
   ].
 
 mod_opt_type(hostname) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p]", [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE]),
   econf:string().
 
 mod_doc() ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p]", [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE]),
   #{
     desc => <<"Returns list of MUC members with affiliations">>,
     note => "Note...",
@@ -84,8 +80,7 @@ mod_doc() ->
 
 -spec get_local_commands(mod_disco:items_acc(), jid(), jid(), binary(), binary()) -> mod_disco:items_acc().
 get_local_commands(Acc, From, #jid{server = Server, lserver = LServer} = To, <<"">>, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, <<"">>, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, <<"">>, Lang]),
   Display = mod_adhoc_opt:report_commands_node(LServer),
   case Display of
     false ->
@@ -106,22 +101,18 @@ get_local_commands(Acc, From, #jid{server = Server, lserver = LServer} = To, <<"
       {result, Items ++ Nodes}
   end;
 get_local_commands(Acc, From, #jid{lserver = LServer} = To, ?NS_COMMANDS, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, ?NS_COMMANDS, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, ?NS_COMMANDS, Lang]),
   ejabberd_hooks:run_fold(adhoc_local_items, LServer, {result, []}, [From, To, Lang]);
 get_local_commands(Acc, From, To, <<"membersinfo">>, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, <<"membersinfo">>, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, <<"membersinfo">>, Lang]),
   {result, []};
 get_local_commands(Acc, From, To, Node, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, Node, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, Node, Lang]),
   Acc.
 
 -spec get_local_features(mod_disco:features_acc(), jid(), jid(), binary(), binary()) -> mod_disco:features_acc().
 get_local_features(Acc, From, To, <<"">>, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, <<"">>, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, <<"">>, Lang]),
   Feats =
     case Acc of
       {result, I} ->
@@ -131,31 +122,25 @@ get_local_features(Acc, From, To, <<"">>, Lang) ->
     end,
   {result, Feats ++ [?NS_COMMANDS]};
 get_local_features(Acc, From, To, ?NS_COMMANDS, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, ?NS_COMMANDS, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, ?NS_COMMANDS, Lang]),
   {result, []};
 get_local_features(Acc, From, To, <<"membersinfo">>, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, <<"membersinfo">>, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, <<"membersinfo">>, Lang]),
   {result, [?NS_COMMANDS]};
 get_local_features(Acc, From, To, Node, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, Node, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, Node, Lang]),
   Acc.
 
 -spec get_local_identity([identity()], jid(), jid(), binary(), binary()) -> [identity()].
 %% On disco info request to the ad-hoc node, return automation/command-list.
 get_local_identity(Acc, From, To, ?NS_COMMANDS, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, ?NS_COMMANDS, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, ?NS_COMMANDS, Lang]),
   [#identity{category = <<"automation">>, type = <<"command-list">>, name = translate:translate(Lang, ?T("Commands"))} | Acc];
 get_local_identity(Acc, From, To, <<"membersinfo">>, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, <<"membersinfo">>, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, <<"membersinfo">>, Lang]),
   [#identity{category = <<"automation">>, type = <<"command-node">>, name = translate:translate(Lang, ?T("MembersInfo"))} | Acc];
 get_local_identity(Acc, From, To, Node, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%    [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, Node, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, Node, Lang]),
   Acc.
 
 %%commands_result(Allow, From, To, Request) ->
@@ -169,8 +154,7 @@ get_local_identity(Acc, From, To, Node, Lang) ->
 
 -spec membersinfo_item(mod_disco:items_acc(), jid(), jid(), binary()) -> {result, [disco_item()]}.
 membersinfo_item(Acc, From, #jid{server = Server} = To, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Lang: ~p", [Acc, From, To, Lang]),
   Items =
     case Acc of
       {result, I} ->
@@ -209,13 +193,29 @@ membersinfo_command(From, To, #adhoc_command{lang = Lang, node = Node, sid = SID
   adhoc_command()
   | {error, stanza_error()}.
 membersinfo_command(Acc, From, To, #adhoc_command{lang = Lang, node = <<"membersinfo">>, action = Action, xdata = XData} = Request) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Request: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, Request]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Request: ~p", [Acc, From, To, Request]),
   if Action == execute ->
     [#xdata_field{var = <<"room">>, values = [RoomJID]}] = XData#xdata.fields,
     JID = jid:decode(RoomJID),
+    L1 = mod_muc_admin:get_room_occupants(JID#jid.luser, JID#jid.lserver),
+    L2 = mod_muc_admin:get_room_affiliations_v3(JID#jid.luser, JID#jid.lserver),
+    [{OwnerJID, _, _}] = lists:filter(fun({_OwnerJID, Role, _Reason}) -> Role =:= owner end, L2),
+    Owner = (jid:decode(OwnerJID))#jid.luser,
+    IsOwner =
+      fun(UserJID) ->
+        Owner =:= (jid:decode(UserJID))#jid.luser
+      end,
+    F =
+      fun({UserJID_, UserNick, _Role} = Entry) ->
+        case IsOwner(UserJID_) of
+          true ->
+            {UserJID_, UserNick, <<"owner">>};
+          false ->
+            Entry
+        end
+      end,
     Fields =
-      case mod_muc_admin:get_room_occupants(JID#jid.luser, JID#jid.lserver) of
+      case lists:map(F, L1) of
         [] -> [];
         [_|_] = L ->
           [#xdata_field{label = Affiliation, var = Nick} || {_Jid, Nick, Affiliation} <- L]
@@ -235,14 +235,12 @@ membersinfo_command(Acc, From, To, #adhoc_command{lang = Lang, node = <<"members
       {error, xmpp:err_bad_request(Txt, Lang)}
   end;
 membersinfo_command(Acc, From, To, Request) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Request: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, Request]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Request: ~p", [Acc, From, To, Request]),
   Acc.
 
 -spec get_sm_features(mod_disco:features_acc(), jid(), jid(), binary(), binary()) -> mod_disco:features_acc().
 get_sm_features(Acc, From, To, <<"">>, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, <<"">>, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, <<"">>, Lang]),
   Feats =
     case Acc of
       {result, I} ->
@@ -252,26 +250,24 @@ get_sm_features(Acc, From, To, <<"">>, Lang) ->
     end,
   {result, Feats ++ [?NS_COMMANDS]};
 get_sm_features(Acc, From, To, ?NS_COMMANDS, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, ?NS_COMMANDS, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, ?NS_COMMANDS, Lang]),
   {result, []};
 get_sm_features(Acc, From, To, Node, Lang) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p",
-%%            [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, Acc, From, To, Node, Lang]),
+%%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Node: ~p, Lang: ~p", [Acc, From, To, Node, Lang]),
   Acc.
 
 -spec process_local_iq(iq()) ->
   iq()
   | ignore.
 process_local_iq(IQ) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] IQ: ~p", [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, IQ]),
+%%  ?LOG_INFO("IQ: ~p", [IQ]),
   process_adhoc_request(IQ, local).
 
 -spec process_sm_iq(iq()) ->
   iq()
   | ignore.
 process_sm_iq(IQ) ->
-%%  ?LOG_INFO("[~p:~p/~p, ~p] IQ: ~p", [?MODULE, ?FUNCTION_NAME, ?FUNCTION_ARITY, ?LINE, IQ]),
+%%  ?LOG_INFO("IQ: ~p", [IQ]),
   process_adhoc_request(IQ, sm).
 
 -spec process_adhoc_request(iq(), sm | local) ->
