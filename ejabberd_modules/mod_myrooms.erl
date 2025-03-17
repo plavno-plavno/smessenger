@@ -185,13 +185,6 @@ myrooms_command(From, To, #adhoc_command{lang = Lang, node = Node, sid = SID, xd
 myrooms_command(Acc, From, To, #adhoc_command{lang = Lang, node = <<"myrooms">>, action = Action} = Request) ->
 %%  ?LOG_INFO("Acc: ~p, From: ~p, To: ~p, Request: ~p", [Acc, From, To, Request]),
   if Action == execute ->
-    % TODO: mod_muc_admin:get_user_subscriptions(<<"admin">>, <<"localhost">>) -> {ok, [{RoomJID, UserNick, [Node]}]} | {error, any()}
-    % [{<<"foo@conference.localhost">>,<<"local-2">>,
-    %  [<<"urn:xmpp:mucsub:nodes:messages">>,
-    %  <<"urn:xmpp:mucsub:nodes:affiliations">>,
-    %  <<"urn:xmpp:mucsub:nodes:subject">>,
-    %  <<"urn:xmpp:mucsub:nodes:config">>]}]
-    % mod_muc_admin:get_user_rooms(<<"admin">>, <<"localhost">>).
     L1 = mod_muc_admin:get_user_rooms(From#jid.luser, From#jid.lserver),
     L2 = mod_muc_admin:get_user_subscriptions(From#jid.luser, From#jid.lserver),
     L3 = lists:map(fun({RoomJID, _UserNick, _Nodes}) -> RoomJID end, L2),
