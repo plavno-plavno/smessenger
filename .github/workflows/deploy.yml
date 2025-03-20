@@ -19,7 +19,7 @@ jobs:
         run: sudo docker compose down
 
       - name: Clean docker build cache
-        run: docker system prune -a
+        run: docker system prune -af
 
       - name: Build and run smessenger deploy
         run: docker compose up --build -d
