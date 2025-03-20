@@ -18,5 +18,8 @@ jobs:
       - name: Shutdown previous smessenger deploy
         run: sudo docker compose down
 
-      - name: Run smessenger deploy
-        run: sudo docker compose up -d
+      - name: Clean docker build cache
+        run: docker system prune -a
+
+      - name: Build and run smessenger deploy
+        run: docker compose up --build -d
